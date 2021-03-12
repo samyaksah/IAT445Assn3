@@ -7,6 +7,8 @@ public class Gun : MonoBehaviour
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
+    public AudioClip gunshot;
+    public AudioSource shotAudio;
 
     void Update()
     {
@@ -19,6 +21,7 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         muzzleFlash.Play();
+        shotAudio.PlayOneShot(gunshot);
         RaycastHit hit;
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))

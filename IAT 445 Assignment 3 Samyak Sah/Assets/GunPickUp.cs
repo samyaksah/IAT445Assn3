@@ -24,8 +24,6 @@ public class GunPickUp : MonoBehaviour
             gunScript.enabled = false;
             rb.isKinematic = false;
             coll.isTrigger = false;
-            PickUI.SetActive(false);
-            DropUI.SetActive(true);
         }
         if (equipped)
         {
@@ -33,8 +31,6 @@ public class GunPickUp : MonoBehaviour
             rb.isKinematic = true;
             coll.isTrigger = true;
             slotFull = true;
-            PickUI.SetActive(true);
-            DropUI.SetActive(false);
         }
     }
 
