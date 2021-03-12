@@ -19,7 +19,7 @@ public class GunPickUp : MonoBehaviour
     private void Start()
     {
         //Setup
-        if (!equipped)
+        if (!equipped) // check if the gun is already equipped or not
         {
             gunScript.enabled = false;
             rb.isKinematic = false;
@@ -37,10 +37,10 @@ public class GunPickUp : MonoBehaviour
     private void Update()
     {
         //Check if player is in range and "E" is pressed
-        Vector3 distanceToPlayer = player.position - transform.position;
+        Vector3 distanceToPlayer = player.position - transform.position;  
         if(!equipped && distanceToPlayer.magnitude <= UIRange)
         {
-            PickUI.SetActive(true);
+            PickUI.SetActive(true);  // show pick up call to action
             DropUI.SetActive(false);
         }
         else
@@ -51,16 +51,19 @@ public class GunPickUp : MonoBehaviour
 
         if (equipped)
         {
-            DropUI.SetActive(true);
+            DropUI.SetActive(true); // show drop call to action
             PickUI.SetActive(false);
         }
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull)
         {            
-            PickUp();            
+            PickUp(); // pick up the gun if the player is close to it, does not already have a gun and when presses E on the keyboard
         }
 
         //Drop if equipped and "Q" is pressed
-        if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
+        if (equipped && Input.GetKeyDown(KeyCode.Q))
+        {
+            Drop(); 
+        }
     }
 
     private void PickUp()

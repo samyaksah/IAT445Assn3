@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public float damage = 10f;
-    public float range = 100f;
+    public float damage = 10f; // damage done by every bullet
+    public float range = 100f; // max range at which the bullet can shoot
 
+    // initialising player and gun properties
     public Camera fpsCam;
     public ParticleSystem muzzleFlash;
     public AudioClip gunshot;
@@ -12,6 +13,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        //shoot when pressed mouse 1
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -20,17 +22,18 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        muzzleFlash.Play();
-        shotAudio.PlayOneShot(gunshot);
-        RaycastHit hit;
 
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+        muzzleFlash.Play(); // play the muzzle flash
+        shotAudio.PlayOneShot(gunshot);// play the gunshot
+        RaycastHit hit; // define raycast
+
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) // if the gun hits an enemy
         {
             Debug.Log(hit.transform.name);
-            Target target = hit.transform.GetComponent<Target>();
+            Target target = hit.transform.GetComponent<Target>(); // set target from the hit raycast
             if(target != null)
             {
-                target.TakeDamage(damage);
+                target.TakeDamage(damage); // target takes damage
             }
         }
     }
